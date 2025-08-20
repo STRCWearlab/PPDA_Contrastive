@@ -132,7 +132,7 @@ python simuclr_ft.py --wandb \
 ## 📚 Links
 
 - WIMUSim: [Paper](https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2025.1514933/full), [GitHub](https://github.com/STRCWearlab/WIMUSim)
-- PPDA: [Paper](), [GitHub](https://github.com/STRCWearlab/PPDA)
+- PPDA: [Paper](https://www.arxiv.org/abs/2508.13284), [GitHub](https://github.com/STRCWearlab/PPDA)
 
 ## 🙏 Acknowledgements
 
