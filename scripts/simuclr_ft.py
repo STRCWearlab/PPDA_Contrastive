@@ -1,6 +1,5 @@
 import sys
-import glob
-from collections import Counter
+import os
 
 sys.path.append("..")
 import time
@@ -9,6 +8,7 @@ import random
 import json
 import wandb
 import pandas as pd
+from dotenv import load_dotenv
 
 from simuclr.datasets import SensorDataset, sliding_window
 from simuclr.dataloaders import StratifiedSubsetSampler, FixedKPerClassSampler
@@ -122,6 +122,7 @@ def parse_args():
 
 
 if __name__ == "__main__":
+    load_dotenv()
     config = parse_args()
     configure_dataset_params(config)
 
@@ -130,7 +131,7 @@ if __name__ == "__main__":
 
     if config.wandb:
         WANDB_PROJECT = f"simuclr_{config.dataset_name}_ft_ld"
-        # WANDB_ENTITY = "nobuyuki"
+        WANDB_ENTITY = os.environ.get("WANDB_ENTITY", "SPECIFY_YOUR_WANDB_ENTITY")
         randint = random.randint(0, 1000)
 
         WANDB_NAME = f"{config.pt_run_name}_ft_{randint}"

@@ -1,4 +1,5 @@
 import sys
+import os
 
 sys.path.append("..")
 import time
@@ -10,7 +11,7 @@ import torch
 import wandb
 import pandas as pd
 import numpy as np
-
+from dotenv import load_dotenv
 from simuclr.datasets import SensorDataset, sliding_window
 from simuclr.dataloaders import StratifiedSubsetSampler, FixedKPerClassSampler
 from simuclr.augmentations.aug_planner import ContrastiveAugPolicyPlanner
@@ -287,6 +288,7 @@ def prepare_aug_function(aug_name: str, config, device):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     config = parse_args()
     configure_dataset_params(config)
     # Add path_processed to the config
@@ -301,7 +303,7 @@ if __name__ == "__main__":
 
     if config.wandb:
         WANDB_PROJECT = f"simuclr_{config.dataset_name}_pt_ft"
-        # WANDB_ENTITY = "nobuyuki"
+        WANDB_ENTITY = os.environ.get("WANDB_ENTITY", "SPECIFY_YOUR_WANDB_ENTITY")
         randint = random.randint(0, 1000)
         first_augs_str = "-".join(config.first_augs)
         if len(config.second_augs) == 0:

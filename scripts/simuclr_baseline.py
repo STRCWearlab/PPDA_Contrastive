@@ -1,4 +1,5 @@
 import sys
+import os
 
 sys.path.append("..")
 import time
@@ -162,6 +163,7 @@ def configure_dataset_params(config):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     config = parse_args()
     configure_dataset_params(config)
     # Add path_processed to the config
@@ -169,7 +171,7 @@ if __name__ == "__main__":
 
     if config.wandb:
         WANDB_PROJECT = f"simuclr_{config.dataset_name}"
-        # WANDB_ENTITY = "nobuyuki"
+        WANDB_ENTITY = os.environ.get("WANDB_ENTITY", "SPECIFY_YOUR_WANDB_ENTITY")
         randint = random.randint(0, 1000)
         WANDB_NAME = f"baseline_{randint}"
 
